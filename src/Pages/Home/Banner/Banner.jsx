@@ -2,11 +2,12 @@ import React from "react";
 import { ArrowLongRightIcon } from "@heroicons/react/24/solid";
 import image1 from "../../../assets/Banner/portrait-young-man-yellow-scene2222222.jpg"
 import image2 from "../../../assets/Banner/portrait-young-man-yellow-scene11111.jpg"
+import { MyButton } from "../../Components/MyButton/MyButton";
 
 const Banner = () => {
   return (
     <div className="mt-20">
-      <h1 className="text-center font-semibold text-6xl ">
+      <h1 className="text-center font-semibold text-5xl ">
         Upgrade Your Waredrobe With Our <br /> Fresh Take On Street Fashion
       </h1>
       {/* Cards */}
@@ -52,13 +53,13 @@ const Banner = () => {
             form stylish sneakers to <br />
             statement jackets
           </p>
-          <button class="btn primary-button mt-3 mb-3">
+          <MyButton color="secoundary" size="md" className="mt-4 mb-3">
             Explore now <ArrowLongRightIcon class="size-6 text-black" />
-          </button>
+          </MyButton>
           <br />
-          <button class="btn secondary-button text-white">
+          <MyButton color="primary" size="md" className="mt-4 text-white">
             Create a account
-          </button>
+          </MyButton>
         </div>
       </div>
     </div>

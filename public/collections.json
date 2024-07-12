@@ -115,14 +115,7 @@
     "image": "https://i.ibb.co/BqZnKvz/WOOLEN-DUFFLE-HOODED-COAT.jpg",
     "rating": 4.2
   },
-  {
-    "id": 19,
-    "productName": "Black Retro Sweatpants",
-    "price": 199.99,
-    "category": "Woman",
-    "image": "https://i.ibb.co/HDcW834/BLACK-RETRO-STYLED-STRIPED-WIDE-SWEATPANTS.webp",
-    "rating": 4.7
-  },
+  
   {
     "id": 20,
     "productName": "Black Velvet French ",
@@ -179,6 +172,13 @@
     "category": "Woman",
     "image": "https://i.ibb.co/74g8tMM/STAR-EMBROIDERED-ZIP-UP-HOODIE.jpg",
     "rating": 4.1
+  },{
+    "id": 19,
+    "productName": "Black Retro Sweatpants",
+    "price": 199.99,
+    "category": "Woman",
+    "image": "https://i.ibb.co/HDcW834/BLACK-RETRO-STYLED-STRIPED-WIDE-SWEATPANTS.webp",
+    "rating": 4.7
   }
  
 ]

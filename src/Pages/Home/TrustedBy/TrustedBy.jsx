@@ -7,7 +7,7 @@ import logo5 from "../../../assets/Trusted by/771833_10-01.jpg";
 
 const TrustedBy = () => {
     return (
-      <div className="flex justify-center items-center space-x-16 mb-20">
+      <div className="flex justify-center items-center space-x-16 ">
         <img src={logo1} alt="Gucci" className="w-[13%]" />
         <img src={logo2} alt="Company 2" className="w-[13%]" />
         <img src={logo3} alt="Company 3" className="w-[13%]" />

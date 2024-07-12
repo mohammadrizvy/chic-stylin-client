@@ -1,13 +1,22 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import {  RouterProvider } from "react-router-dom";
-import { router } from './Routes/routes.jsx';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./Routes/routes.jsx";
+import { Helmet, HelmetProvider } from "react-helmet-async";
+import { NextUIProvider } from "@nextui-org/react";
+import AuthProviders from "./Providers/AuthProviders.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <div className="max-w-screen-2xl mx-auto">
-      <RouterProvider router={router} />
-    </div>
+    <NextUIProvider>
+      <AuthProviders>
+        <HelmetProvider>
+          <div className="max-w-screen-xl mx-auto">
+            <RouterProvider router={router} />
+          </div>
+        </HelmetProvider>
+      </AuthProviders>
+    </NextUIProvider>
   </React.StrictMode>
 );

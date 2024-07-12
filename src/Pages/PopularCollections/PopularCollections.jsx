@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CollectionsHeader from "../Components/CollectionsHeader/CollectionsHeader";
 import { StarIcon } from "@heroicons/react/24/solid";
+import { MyButton } from "../Components/MyButton/MyButton";
 
 const PopularCollections = () => {
   const [collection, setCollection] = useState([]);
@@ -27,9 +28,15 @@ const PopularCollections = () => {
       />
       <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 items-center justify-center gap-5">
         {collection.map((item) => (
-          <div key={item.id} className="card card-compact w-96 mt-20">
-            <figure>
-              <img src={item.image} alt={item.productName} />
+          <div key={item.id} className="card card-compact w-80 mt-20">
+            <figure className="h-80 overflow-hidden ">
+              <img
+                src={item.image}
+                alt={item.productName}
+                style={{
+                  clipPath: "polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%)",
+                }}
+              />
             </figure>
             <div className="card-body">
               <h2 className="card-title">{item.productName}</h2>
@@ -46,10 +53,10 @@ const PopularCollections = () => {
               </div>
 
               <div className="card-actions justify-center">
-                <button className="btn secondary-button text-white w-[50%]">
+                <MyButton color="primary" className=" w-[50%]">
                   Add to cart
-                </button>
-                <button className="btn primary-button w-[40%]">Buy Now</button>
+                </MyButton>
+                <MyButton  className=" w-[40%] ">Buy Now</MyButton>
               </div>
             </div>
           </div>

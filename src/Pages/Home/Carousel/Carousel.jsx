@@ -5,6 +5,7 @@ import "react-awesome-slider/dist/styles.css";
 import image1 from "../../../assets/Carousel/young-people-london-streets11.jpg";
 import image2 from "../../../assets/Carousel/young-people-london-streets22.jpg";
 import image3 from "../../../assets/Carousel/outdoor-hat-lifestyle-black-girl33.jpg";
+import { MyButton } from "../../Components/MyButton/MyButton";
 
 const Carousel = () => {
   return (
@@ -15,9 +16,9 @@ const Carousel = () => {
             <div className=" text-white p-4 text-center text-5xl font-bold">
               Discover your latest <br /> collection on our shop
             </div>
-            <button class="btn border-none primary-button mt-3 mb-3">
+            <MyButton  color="primary" size="lg" className="mt-3 mb-3">
               Explore now
-            </button>
+            </MyButton>
           </div>
         </div>
         <div data-src={image1} className="relative">
@@ -25,9 +26,9 @@ const Carousel = () => {
             <div className=" text-white p-4 text-center text-5xl font-bold">
               Discover your latest <br /> collection on our shop
             </div>
-            <button class="btn border-none primary-button mt-3 mb-3">
+            <MyButton  color="primary" size="lg" className="mt-3 mb-3">
               Explore now
-            </button>
+            </MyButton>
           </div>
         </div>
         <div data-src={image3} className="relative">
@@ -35,9 +36,9 @@ const Carousel = () => {
             <div className=" text-white p-4 text-center text-5xl font-bold">
               Discover your latest <br /> collection on our shop
             </div>
-            <button class="btn border-none primary-button mt-3 mb-3">
+            <MyButton  color="primary" size="lg" className="mt-3 mb-3">
               Explore now
-            </button>
+            </MyButton>
           </div>
         </div>
       </AwesomeSlider>
