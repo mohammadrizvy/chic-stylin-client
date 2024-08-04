@@ -25,11 +25,15 @@ import { LiaUserEditSolid } from "react-icons/lia";
 import { MyButton } from "../Components/MyButton/MyButton";
 import toast, { Toaster } from "react-hot-toast";
 import userCart from "../../Hooks/useCart";
+import useAdmin from "../../Hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [cart] = userCart();
-  const admin = true;
+  // const isAdmin = true ; 
+  const [isAdmin, isAdminLoading] = useAdmin(); 
+
+  
   const navigate = useNavigate();
 
   const handleLogOut = () => {
@@ -138,7 +142,7 @@ const Navbar = () => {
                     Profile
                   </DropdownItem>
                 ) : null}
-                {user || admin || buyer || process || outlet || seller ? (
+                {isAdmin ? (
                   <DropdownItem
                
                     shortcut="⌘⇧D"
