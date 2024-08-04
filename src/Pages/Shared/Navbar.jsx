@@ -14,7 +14,9 @@ import {
   DropdownItem,
   Button,
   cn,
+  Badge,
 } from "@nextui-org/react";
+import { RxDashboard } from "react-icons/rx";
 
 import { AuthContext } from "../../Providers/AuthProviders";
 import { IoLogInSharp } from "react-icons/io5";
@@ -22,14 +24,19 @@ import { TbLogout2 } from "react-icons/tb";
 import { LiaUserEditSolid } from "react-icons/lia";
 import { MyButton } from "../Components/MyButton/MyButton";
 import toast, { Toaster } from "react-hot-toast";
+import userCart from "../../Hooks/useCart";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [cart] = userCart();
+  const admin = true;
+  const navigate = useNavigate();
 
   const handleLogOut = () => {
     logOut()
       .then(() => {
         toast.success("Logout successful");
+        navigate("/");
       })
       .catch(() => {
         toast.error("Can't log out");
@@ -50,11 +57,13 @@ const Navbar = () => {
     setIsModalOpen(false);
   };
 
-  const navigate = useNavigate();
+  const navigateToProfile = () => {
+    navigate("/profile");
+  };
 
-  const navigateToProfile =() => {
-    navigate("/profile")
-  }
+  const navigateToDashbaord = () => {
+    navigate("/dashboard");
+  };
 
   const iconClasses =
     "text-xl text-default-500 pointer-events-none flex-shrink-0";
@@ -66,29 +75,34 @@ const Navbar = () => {
         <div className="navbar-start flex items-center">
           <Link to="/">
             <p className="font-extrabold text-lg">chic.stylin</p>
+            {user?.displayName}
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex space-x-10">
-          <a className="font-semibold text-sm">
+          <p className="font-semibold text-sm">
             <Link to="/">Home</Link>
-          </a>
-          {/* {user?.displayName} */}
-          <a className="font-semibold text-sm">
+          </p>
+          
+          <p className="font-semibold text-sm">
             <Link to="collection">Collection</Link>
-          </a>
-          <a className="font-semibold text-sm">Sell</a>
+          </p>
+          <p className="font-semibold text-sm">Sell</p>
           <Link to="/discount">
-            <a className="font-semibold text-sm">Discount</a>
+            <p className="font-semibold text-sm">Discount</p>
           </Link>
 
-          <a className="font-semibold text-sm">About</a>
-          <a className="font-semibold text-sm">Contact</a>
-          <a className="font-semibold text-sm">
-            <ShoppingBagIcon className="h-6 w-6 text-black" />
-          </a>
+          <p className="font-semibold text-sm">About</p>
+          <p className="font-semibold text-sm">Contact</p>
+          <Badge content={cart?.length || 0}>
+            <Link to="/carts" className="font-semibold text-sm">
+              <ShoppingBagIcon className="h-7 w-7 text-black" />
+            </Link>
+          </Badge>
         </div>
         <div className="navbar-end hidden lg:flex space-x-4">
-          <MyButton className="btn btn-ghost">Customer Supports</MyButton>
+          <MyButton color="default" size="md" className="">
+            Customer Supports
+          </MyButton>
 
           <Dropdown backdrop="blur" className="shadow-2xl">
             <DropdownTrigger>
@@ -103,7 +117,7 @@ const Navbar = () => {
               <DropdownSection title="Actions" showDivider>
                 {user ? null : (
                   <DropdownItem
-                    key="new"
+                 
                     shortcut="⌘N"
                     description="Login to your account"
                     startContent={<IoLogInSharp className={iconClasses} />}
@@ -112,30 +126,37 @@ const Navbar = () => {
                     Login
                   </DropdownItem>
                 )}
-                
-                  {user ? (
-                    
-                    <DropdownItem
-                      key="edit"
-                      shortcut="⌘⇧E"
-                      description="Manage your profie"
-                      onClick={navigateToProfile}
-                      startContent={
-                        <LiaUserEditSolid className={iconClasses} />
-                      }
-                    >
-                      Profile
-                    </DropdownItem>
-                  ) : null}
-                
+
+                {user ? (
+                  <DropdownItem
+                   
+                    shortcut="⌘⇧E"
+                    description="Manage your profie"
+                    onClick={navigateToProfile}
+                    startContent={<LiaUserEditSolid className={iconClasses} />}
+                  >
+                    Profile
+                  </DropdownItem>
+                ) : null}
+                {user || admin || buyer || process || outlet || seller ? (
+                  <DropdownItem
+               
+                    shortcut="⌘⇧D"
+                    description="Dashboard"
+                    onClick={navigateToDashbaord}
+                    startContent={<RxDashboard className={iconClasses} />}
+                  >
+                    Dashboard
+                  </DropdownItem>
+                ) : null}
               </DropdownSection>
               {user ? (
                 <DropdownSection title="Exit zone">
                   <DropdownItem
-                    key="delete"
+                  
                     className="text-danger"
                     color="danger"
-                    shortcut="⌘⇧D"
+                    shortcut="⌘⇧O"
                     description="Log out your account"
                     onClick={handleLogOut}
                     startContent={
@@ -163,31 +184,42 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="lg:hidden mt-4 pb-5 px-4">
           <div className="flex flex-col space-y-4">
-            <a className="font-semibold text-sm">
+            <p className="font-semibold text-sm">
               <Link to="/">Home</Link>
-            </a>
-            <a className="font-semibold text-sm">
+            </p>
+            <p className="font-semibold text-sm">
               <Link to="">Collection</Link>
-            </a>
-            <a className="font-semibold text-sm">
+            </p>
+            <p className="font-semibold text-sm">
               <Link to="">Sell</Link>
-            </a>
-            <a className="font-semibold text-sm">
+            </p>
+            <p className="font-semibold text-sm">
               <Link to="">Discount</Link>
-            </a>
-            <a className="font-semibold text-sm">
+            </p>
+            <p className="font-semibold text-sm">
               <Link to="">About</Link>
-            </a>
-            <a className="font-semibold text-sm">
+            </p>
+            <p className="font-semibold text-sm">
               <Link to="">Contact</Link>
-            </a>
-            <a className="font-semibold text-sm">
+            </p>
+            <p className="font-semibold text-sm">
               <Link to="">Customer Supports</Link>
-            </a>
-
-            <button className="btn btn-ghost w-20 font-bold primary-button">
-              <Link onClick={openModal}>Account</Link>
-            </button>
+            </p>
+            {user ? (
+              <p className="font-semibold text-sm">
+                <p className="" onClick={handleLogOut}>
+                  Logout
+                </p>
+              </p>
+            ) : (
+              <MyButton
+                color="primary"
+                size="sm"
+                className="font-semibold text-sm w-10"
+              >
+                <p onClick={openModal}>Login</p>
+              </MyButton>
+            )}
           </div>
         </div>
       )}

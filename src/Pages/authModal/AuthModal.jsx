@@ -38,27 +38,48 @@ const AuthModal = ({ isOpen, onClose }) => {
   const handleSignup = (data) => {
     const { email, password, name, photoURL } = data;
     console.log("Signup Form Data:", data);
-
+  
     createUser(email, password)
       .then((userCredential) => {
         toast.success("Account created successfully");
-        onClose(); // Close the modal after successful signup
-
+        onClose();
+  
         // Update user profile after signup
         updateUserProfile(name, photoURL)
           .then(() => {
-            toast.success("Profile updated successfully");
+            const saveUser = { name, email };
+            fetch("http://localhost:7000/users", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(saveUser),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.insertedId) {
+                  toast.success("Profile updated successfully");
+                } else {
+                  toast.error("Failed to save user profile");
+                }
+              })
+              .catch((error) => {
+                toast.error("Error saving user profile: " + error.message);
+              });
           })
           .catch((error) => {
             toast.error("Error updating profile: " + error.message);
+          })
+          .finally(() => {
+            reset();
           });
-        
-        reset(); // Reset form fields after submission
       })
       .catch((error) => {
         toast.error("Error occurred: " + error.message);
       });
   };
+
+  //! FOR USER LOGIN
 
   const handleLogin = (data) => {
     const { email, password } = data;
@@ -83,7 +104,7 @@ const AuthModal = ({ isOpen, onClose }) => {
       placement="top-center"
     >
       <ModalContent>
-        <Toaster position="bottom-right" reverseOrder={false} />
+        {/* <Toaster position="bottom-right" reverseOrder={false} /> */}
         {isLogin ? (
           <>
             <ModalHeader className="flex flex-col gap-1 mx-auto">
@@ -143,10 +164,10 @@ const AuthModal = ({ isOpen, onClose }) => {
                 </p>
               </div>
               <ModalFooter>
-                <MyButton variant="flat" onPress={onClose}>
+                <MyButton  color="default" size="md"  onPress={onClose}>
                   Close
                 </MyButton>
-                <MyButton type="submit" color="primary">
+                <MyButton   size="md" type="submit" color="primary">
                   Log in
                 </MyButton>
               </ModalFooter>
@@ -167,7 +188,7 @@ const AuthModal = ({ isOpen, onClose }) => {
                   label="Username"
                   placeholder="Enter your username"
                   variant="bordered"
-                  {...register("name", { required: "Username is required" })}
+                  {...register("name")}
                 />
                 <Input
                   endContent={
@@ -225,11 +246,11 @@ const AuthModal = ({ isOpen, onClose }) => {
                 </p>
               </div>
               <ModalFooter>
-                <MyButton variant="flat" onPress={onClose}>
+              <MyButton  color="default" size="md"  onPress={onClose}>
                   Close
                 </MyButton>
-                <MyButton type="submit" color="primary">
-                  Sign up
+                <MyButton   size="md" type="submit" color="primary">
+                  Sign Up
                 </MyButton>
               </ModalFooter>
             </form>

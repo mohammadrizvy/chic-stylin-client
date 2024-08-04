@@ -1,7 +1,7 @@
 import React from "react";
 import { ArrowLongRightIcon } from "@heroicons/react/24/solid";
-import image1 from "../../../assets/Banner/portrait-young-man-yellow-scene2222222.jpg"
-import image2 from "../../../assets/Banner/portrait-young-man-yellow-scene11111.jpg"
+import image1 from "../../../assets/Banner/banner1.jpeg"
+import image2 from "../../../assets/Banner/banner2-ezgif.com-webp-to-jpg-converter.jpg"
 import { MyButton } from "../../Components/MyButton/MyButton";
 
 const Banner = () => {
@@ -54,7 +54,7 @@ const Banner = () => {
             statement jackets
           </p>
           <MyButton color="secoundary" size="md" className="mt-4 mb-3">
-            Explore now <ArrowLongRightIcon class="size-6 text-black" />
+            Explore now <ArrowLongRightIcon className="size-6 text-black" />
           </MyButton>
           <br />
           <MyButton color="primary" size="md" className="mt-4 text-white">

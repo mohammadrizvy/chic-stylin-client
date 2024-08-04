@@ -8,7 +8,9 @@ const ContactUs = () => {
     <div className="hero  ">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="">
-          <MyButton className="mb-3" color="primary" size="sm" radius="full">join us</MyButton>
+          <MyButton className="mb-3" color="primary" size="sm" radius="full">
+            join us
+          </MyButton>
           <h1 className="text-5xl font-bold">Chic.Styling For Everyone</h1>
           <p className="py-6">
             We All Want To Live More Sustainably. We're Here To <br />
@@ -20,8 +22,15 @@ const ContactUs = () => {
               className="grow rounded-2xl placeholder-white text-white"
               placeholder="Enter your email & join us"
             />
-            <MyButton radius="full" size="lg" className="ml-3">Subscribe</MyButton>
-            <ChatBubbleLeftRightIcon class="size-6 text-black" />
+            <MyButton
+              radius="full"
+              size="lg"
+              color="secondary"
+              className="ml-3"
+            >
+              Subscribe
+            </MyButton>
+            <ChatBubbleLeftRightIcon className="size-6 text-black" />
           </label>
         </div>
         <img src={image} className="max-w-lg rounded-lg  " />

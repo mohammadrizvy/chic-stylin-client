@@ -1,27 +1,20 @@
 import React from "react";
-import {CircularProgress} from "@nextui-org/react";
+import { Triangle } from "react-loader-spinner";
+
 const Loader = () => {
-  const [value, setValue] = React.useState(0);
-
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      setValue((v) => (v >= 100 ? 0 : v + 10));
-    }, 500);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <CircularProgress
-      aria-label="Loading..."
-      size="lg"
-      value={value}
-      color="default"
-      showValueLabel={true}
-    />
+    <div className="flex justify-center items-center min-h-screen ">
+      <Triangle
+        visible={true}
+        height="80"
+        width="80"
+        color="#000000"
+        ariaLabel="triangle-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+      />
+    </div>
   );
-}
-
-
+};
 
 export default Loader;

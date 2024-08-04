@@ -6,15 +6,22 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
+  signInWithPopup,
+  GoogleAuthProvider,
 } from "firebase/auth";
 import app from "../Firebase/firebase.config";
+import axios from "axios";
+import { removeItem } from "localforage";
 const auth = getAuth(app);
+// const axios = require("axios")
 
 export const AuthContext = createContext(null);
 
 const AuthProviders = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const googleProvider = new GoogleAuthProvider();
 
   //?Creating user
   const createUser = (email, password) => {
@@ -26,6 +33,14 @@ const AuthProviders = ({ children }) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
+
+  // ? Goggle Login
+
+  const googleSignIn = () => {
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider);
+  };
+
   //?LogOut User
 
   const logOut = () => {
@@ -36,22 +51,36 @@ const AuthProviders = ({ children }) => {
   //?
 
   const updateUserProfile = (name, photo) => {
-   return updateProfile(auth.currentUser, {
+    return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
     });
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      console.log("LoggedIn User's INFO : ", currentUser);
-      setLoading(false);
+    const unsubscribe = onAuthStateChanged(auth, currentUser => {
+        setUser(currentUser);
+        console.log('current user', currentUser);
+
+        // get and set token
+        if(currentUser){
+            axios.post('http://localhost:7000/jwt', {email: currentUser.email})
+            .then(data =>{
+                console.log(data.data.token)
+                localStorage.setItem('access-token', data.data.token)
+                setLoading(false);
+            })
+        }
+        else{
+            localStorage.removeItem('access-token')
+        }
+
+        
     });
     return () => {
-      return unsubscribe();
-    };
-  }, []);
+        return unsubscribe();
+    }
+}, [])
 
   // !Sending all of the auth
   const authInfo = {
@@ -60,7 +89,8 @@ const AuthProviders = ({ children }) => {
     createUser,
     logIn,
     logOut,
-    updateUserProfile
+    updateUserProfile,
+    googleSignIn,
   };
 
   return (
