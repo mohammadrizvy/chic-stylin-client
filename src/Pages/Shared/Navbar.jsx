@@ -18,7 +18,6 @@ import {
 } from "@nextui-org/react";
 import { RxDashboard } from "react-icons/rx";
 
-import { AuthContext } from "../../Providers/AuthProviders";
 import { IoLogInSharp } from "react-icons/io5";
 import { TbLogout2 } from "react-icons/tb";
 import { LiaUserEditSolid } from "react-icons/lia";
@@ -26,10 +25,11 @@ import { MyButton } from "../Components/MyButton/MyButton";
 import toast, { Toaster } from "react-hot-toast";
 import userCart from "../../Hooks/useCart";
 import useAdmin from "../../Hooks/useAdmin";
+import useAuth from "../../Hooks/useAuth";
 
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
-  const [cart] = userCart();
+  const { user, logOut } = useAuth();
+  const {cart} = userCart();
   // const isAdmin = true ; 
   const [isAdmin, isAdminLoading] = useAdmin(); 
 
@@ -74,7 +74,7 @@ const Navbar = () => {
 
   return (
     <div className="border-b-2 border-black">
-      <Toaster position="bottom-right" reverseOrder={false} />
+      {/* <Toaster  reverseOrder={false} /> */}
       <div className="navbar mt-5 flex items-center justify-between px-4">
         <div className="navbar-start flex items-center">
           <Link to="/">

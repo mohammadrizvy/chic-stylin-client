@@ -18,7 +18,7 @@ const MensCollection = () => {
   const [collection, loading] = useCollection();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [, , refetch] = useCart();
+  const { refetch} = useCart();
   const [isModalOpen, setModalOpen] = useState(false);
 
   const mensItem = collection.filter((item) => item.category === "Man");
@@ -87,6 +87,9 @@ const MensCollection = () => {
       });
     }
   };
+  const handleProductDetails = (item) => {
+    navigate(`/product-details/${item._id}`);
+  };
 
   return (
     <div>
@@ -105,29 +108,29 @@ const MensCollection = () => {
         {mensItem.map((item) => (
           <div key={item.id} className=" card-compact w-80 mt-10">
             <figure className="h-80 overflow-hidden">
-            <LazyLoad
-              
-              threshold={0.95}
-              onContentVisible={() => {
-                console.log("loaded!");
-              }}
-            >
-              <img
-                className="transform hover:scale-105 transition duration-300"
-                src={item.image}
-                alt={item.productName}
-                style={{
-                  clipPath: "polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%)",
+              <LazyLoad
+                threshold={0.95}
+                onContentVisible={() => {
+                  console.log("loaded!");
                 }}
-              />
-            </LazyLoad>
+              >
+                <img
+                  onClick={() => handleProductDetails(item)}
+                  className="transform hover:scale-105 transition duration-300"
+                  src={item.image}
+                  alt={item.productName}
+                  style={{
+                    clipPath: "polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%)",
+                  }}
+                />
+              </LazyLoad>
             </figure>
             <div className="card-body flex flex-col justify-between">
-            <h2 className="card-title -mt-2">{item.productName}</h2>
+              <h2 className="card-title -mt-2">{item.productName}</h2>
               <p className="text-small -mt-3 ">{item.category}</p>
               <div className="flex -mt-1">
                 <p className="text-small  font-semibold"> Tk {item.price}</p>
-                <div className="flex items-center"> 
+                <div className="flex items-center">
                   <StarIcon className="size-4 text-black" />
                   <StarIcon className="size-4 text-black" />
                   <StarIcon className="size-4 text-black" />

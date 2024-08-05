@@ -80,6 +80,11 @@ const PopularCollections = () => {
     }
   };
 
+  const handleProductDetails = (item) => {
+    navigate(`/product-details/${item._id}`)
+  }
+
+
   return (
     <div>
       <CollectionsHeader
@@ -96,7 +101,7 @@ const PopularCollections = () => {
 />
       <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 items-center justify-center gap-5">
         {popularItems.slice(0, 6).map((item) => (
-          <div key={item.id} className=" card-compact h-120 w-80 mt-20">
+          <div  key={item.id} className=" card-compact h-120 w-80 mt-20">
             <figure className="h-80 overflow-hidden ">
               <LazyLoad
               
@@ -104,6 +109,7 @@ const PopularCollections = () => {
                 
               >
                 <img
+                onClick={() => handleProductDetails(item)}
                   className="transform hover:scale-105 transition duration-300"
                   src={item.image}
                   alt={item.productName}

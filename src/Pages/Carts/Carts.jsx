@@ -18,31 +18,24 @@ import { IoStarSharp } from "react-icons/io5";
 import toast, { Toaster } from "react-hot-toast";
 
 const Carts = () => {
-  const [cart, isPending,loading, refetch] = useCart();
-  // console.log(cart)
+  const { cart, refetch, isLoading } = useCart();
   const navigate = useNavigate();
 
-  // Sort cart items by date
   const sortedCart = React.useMemo(() => {
     return [...cart].sort((a, b) => new Date(b.date) - new Date(a.date));
   }, [cart]);
 
-  // Calculate subtotal
   const subtotal = React.useMemo(() => {
     return sortedCart.reduce((acc, item) => acc + item.price, 0);
   }, [sortedCart]);
 
-  console.log(sortedCart);
+  if (isLoading) {
+    return <Loader />;
+  }
 
   const handleGoHome = () => {
     navigate("/");
   };
-
-  if (loading) {
-    return <Loader />;
-  }
-
-  console.log(sortedCart);
 
   const handleDeleteItem = (item) => {
     fetch(`http://localhost:7000/carts/${item._id}`, {
@@ -57,7 +50,7 @@ const Carts = () => {
       .then((data) => {
         if (data.deletedCount > 0) {
           toast.success("Item removed");
-          refetch(); // Refresh the cart data
+          refetch();
         }
       })
       .catch((error) => {
@@ -71,8 +64,7 @@ const Carts = () => {
       <Helmet>
         <title>chic.stylin | My Cart</title>
       </Helmet>
-
-      {/* <Toaster /> */}
+<Toaster position="top-center"></Toaster>
       <div className="min-h-screen">
         <h1 className="text-center my-8 text-3xl font-bold">Shopping Cart</h1>
 

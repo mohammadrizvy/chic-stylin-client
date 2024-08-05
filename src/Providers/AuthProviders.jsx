@@ -31,6 +31,7 @@ const AuthProviders = ({ children }) => {
   //?Login user
   const logIn = (email, password) => {
     setLoading(true);
+
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -58,27 +59,22 @@ const AuthProviders = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, currentUser => {
-      console.log('Auth state changed:', currentUser);
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
-  
       if (currentUser) {
-        axios.post('http://localhost:7000/jwt', { email: currentUser.email })
-          .then(data => {
-            console.log('Token received:', data.data.token);
-            localStorage.setItem('access-token', data.data.token);
-            setLoading(false);
-          })
-          .catch(error => {
-            console.error('Error fetching token:', error);
-            setLoading(false);
+        try {
+          const { data } = await axios.post("http://localhost:7000/jwt", {
+            email: currentUser.email,
           });
+          localStorage.setItem("access-token", data.token);
+        } catch (error) {
+          console.error("Error fetching token:", error);
+        }
       } else {
-        localStorage.removeItem('access-token');
-        setLoading(false);
+        localStorage.removeItem("access-token");
       }
+      setLoading(false);
     });
-  
     return () => unsubscribe();
   }, []);
 

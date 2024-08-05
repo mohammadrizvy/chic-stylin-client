@@ -17,6 +17,7 @@ import ProfileLayout from "../Layout/ProfileLayout";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import ManageItems from "../Pages/Dashboard/ManageItems/ManageItems";
 import AddItems from "../Pages/Dashboard/AddItems/AddItems";
+import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
       {
         path: "/carts",
         element: <Carts></Carts>,
+      },
+      {
+        path: "/product-details/:id",
+        element: <ProductDetails></ProductDetails>,
       },
       {
         path: "/check-out",

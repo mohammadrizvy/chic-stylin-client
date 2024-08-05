@@ -13,8 +13,12 @@ import { MdFolderDelete } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import toast, { Toaster } from "react-hot-toast";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const AllUsers = () => {
+
+  const [ axiosSecure] = useAxiosSecure(); 
+
   const {
     data: users = [],
     isLoading,
@@ -22,8 +26,8 @@ const AllUsers = () => {
   } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:7000/users");
-      return res.json();
+      const res = await axiosSecure.get("/users");
+      return res.data;
     },
   });
 

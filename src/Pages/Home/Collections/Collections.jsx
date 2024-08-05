@@ -37,7 +37,6 @@ const Collections = () => {
         }
         button={"Login"}
       />
-      {/* <Toaster position="top-right" reverseOrder={false}></Toaster> */}
       <div className="max-w-screen-2xl py-14 gap-6 grid grid-cols-12 grid-rows-2 px-8">
         <Card className="col-span-12 sm:col-span-4 h-[300px]">
           <Link to="/mensCollection" className="block h-full">

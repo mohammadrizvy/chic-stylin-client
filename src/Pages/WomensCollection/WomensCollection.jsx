@@ -13,6 +13,7 @@ import { AuthContext } from "../../Providers/AuthProviders";
 import Swal from "sweetalert2";
 import toast, { Toaster } from "react-hot-toast";
 import AuthModal from "../authModal/AuthModal";
+import LazyLoad from "react-lazy-load";
 
 const WomensCollection = () => {
   const [collection, loading] = useCollection();
@@ -22,7 +23,7 @@ const WomensCollection = () => {
   
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [, , refetch] = useCart();
+  const { refetch} = useCart();
   
   const handleAddToCart = (item) => {
     if (user && user.email) {
@@ -90,6 +91,10 @@ const WomensCollection = () => {
     return <Loader />;
   }
   
+  const handleProductDetails = (item) => {
+    navigate(`/product-details/${item._id}`)
+  }
+
   return (
     <div>
       <Helmet>
@@ -103,7 +108,7 @@ const WomensCollection = () => {
           button={"Home"}
           />
       </div>
-      <Toaster></Toaster>
+      <Toaster position="top-right"></Toaster>
       {/* All Womens collections */}
       <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5 mb-1 items-center justify-center">
         {womensItem.map((item) => (
@@ -117,7 +122,7 @@ const WomensCollection = () => {
                 console.log("loaded!");
               }}
             >
-              <img
+              <img onClick={() => handleProductDetails(item)}
                 className="transform hover:scale-105 transition duration-300"
                 src={item.image}
                 alt={item.productName}
