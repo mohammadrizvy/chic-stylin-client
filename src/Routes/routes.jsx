@@ -18,6 +18,8 @@ import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import ManageItems from "../Pages/Dashboard/ManageItems/ManageItems";
 import AddItems from "../Pages/Dashboard/AddItems/AddItems";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
+import AdminRoute from "./AdminRoute";
+import MainDashboard from "../Pages/Dashboard/MainDashboard/MainDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +49,8 @@ export const router = createBrowserRouter([
       {
         path: "/product-details/:id",
         element: <ProductDetails></ProductDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:7000/product-details/${params.id}`),
       },
       {
         path: "/check-out",
@@ -84,19 +88,23 @@ export const router = createBrowserRouter([
   },
   {
     path : "dashboard",
-    element : <Dashboard></Dashboard>,
+    element : <AdminRoute><Dashboard></Dashboard></AdminRoute> ,
     children : [
       {
+        path : "",
+        element : <AdminRoute> <MainDashboard></MainDashboard> </AdminRoute>
+      },
+      {
         path : "all-users",
-        element : <AllUsers/>
+        element : <AdminRoute> <AllUsers/></AdminRoute>
       },
       {
         path : "manage-items",
-        element : <ManageItems/>
+        element :<AdminRoute><ManageItems/></AdminRoute> 
       },
       {
         path : "add-items",
-        element : <AddItems/>
+        element :<AdminRoute><AddItems/></AdminRoute> 
       },
     ]
   }

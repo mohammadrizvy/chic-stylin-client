@@ -1,8 +1,10 @@
 import React from "react";
+import BreadcrumbComponent from "../../Shared/BreadcrumbComponent";
 
 const ManageItems = () => {
   return (
     <div>
+      <BreadcrumbComponent></BreadcrumbComponent>
       MANAGE ITEMS : Lorem ipsum dolor sit amet consectetur adipisicing elit.
       Aliquam, reiciendis deleniti! Earum eum, impedit repudiandae eaque, amet
       nihil architecto, dignissimos sint voluptatum asperiores soluta.

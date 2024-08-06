@@ -14,6 +14,7 @@ import { FaRegUser } from "react-icons/fa";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import toast, { Toaster } from "react-hot-toast";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import BreadcrumbComponent from "../../Shared/BreadcrumbComponent";
 
 const AllUsers = () => {
 
@@ -67,6 +68,7 @@ const AllUsers = () => {
 
   return (
     <div>
+      <BreadcrumbComponent></BreadcrumbComponent>
       <h1 className="text-center text-4xl pb-10 underline font-bold ">
         All Users
       </h1>

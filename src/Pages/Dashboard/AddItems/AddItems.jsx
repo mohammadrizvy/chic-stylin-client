@@ -1,8 +1,10 @@
 import React from "react";
+import BreadcrumbComponent from "../../Shared/BreadcrumbComponent";
 
 const AddItems = () => {
   return (
     <div>
+      <BreadcrumbComponent></BreadcrumbComponent>
       ADD ITEMS : Lorem ipsum, dolor sit amet consectetur adipisicing elit.
       Libero voluptate exercitationem ex ut repellendus iste, recusandae aut
       vitae soluta vel consectetur molestiae dolore quidem modi dolorem unde

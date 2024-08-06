@@ -121,7 +121,7 @@ const PopularCollections = () => {
             </figure>
             <div className="card-body">
               <h2 className="card-title -mt-2">{item.productName}</h2>
-              <p className="text-small -mt-3 ">{item.category}</p>
+              <p className="text-small -mt-3 ">{<item className="category"></item>}</p>
               <div className="flex -mt-1 ">
                 <p className="text-small  font-semibold"> Tk {item.price}</p>
                 <div className="flex items-center">
